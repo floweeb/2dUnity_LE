@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,7 +13,15 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
+        float horizontal_input = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontal_input * speed, body.velocity.y);
+        
+        // Flip player when moving left/right
+        if(horizontal_input > 0.01f)
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        else if (horizontal_input < -0.01f)
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+
         if(Input.GetKey(KeyCode.Space) )
             body.velocity = new Vector2(body.velocity.x, speed);
     }
