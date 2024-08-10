@@ -27,5 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space) )
             body.velocity = new Vector2(body.velocity.x, speed);
+
+        // Set animator parameters
+        anim.SetBool("run", horizontal_input != 0);
     }
 }
