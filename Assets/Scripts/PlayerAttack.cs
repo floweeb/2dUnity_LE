@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private float attackCoolDown;
+    [SerializeField] private float attackCoolDown = 0.25f;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject[] fireballs;
     private Animator anim;
     private PlayerMovement playerMovement;
     private float coolDownTimer = Mathf.Infinity;
@@ -25,5 +27,18 @@ public class PlayerAttack : MonoBehaviour
     {
         anim.SetTrigger("attack");
         coolDownTimer = 0;
+
+        int i = FindFireBall();
+        fireballs[i].transform.position = firePoint.position;
+        fireballs[i].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+    }
+    private int FindFireBall()
+    {
+        for (int i = 0; i < fireballs.Length; i++)
+        {
+            if (!fireballs[i].activeInHierarchy)
+                return i;
+        }
+        return 0;
     }
 }
