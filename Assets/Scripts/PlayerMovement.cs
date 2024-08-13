@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+
     }
     private void Update()
     {
@@ -72,11 +73,8 @@ public class PlayerMovement : MonoBehaviour
             else
                 body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             wallJumpCooldown = 0;
-            
+
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
     }
     private bool isGrounded()
     {
